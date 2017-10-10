@@ -133,6 +133,52 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   function getSeconds(){
       return leadingZero( $_obj.getSeconds() ).toString();
   }
+  
+  function getNextDay(number){
+    let d = new Date().setDate( $_obj.getDate() + undefinedNumberEqualOne(number) )
+    return dayOfWeek( d.getDay() )
+  }
+
+  function getNextDate(number){
+    let d = new Date().setDate( $_obj.getDate() + undefinedNumberEqualOne(number) )
+    return leadingZero( d.getDate() ) 
+  }
+
+  function getNextWeek(number){
+    return getNextDate(7*undefinedNumberEqualOne(number))
+  }
+
+  function getNextMonth(number){
+    let d = new Date().setDate( $_obj.getDate() + undefinedNumberEqualOne(number) )
+    return leadingZero( d.getMonth() )
+  }
+
+  function getNextYear(){
+    return getNextMonth(12*undefinedNumberEqualOne(number))
+  }
+
+  function getPrevDay(){
+    let d = new Date().setDate( $_obj.getDate() - undefinedNumberEqualOne(number) )
+    return dayOfWeek( d.getDay() )
+  }
+
+  function getPrevDate(number){
+    let d = new Date().setDate( $_obj.getDate() + undefinedNumberEqualOne(number) )
+    return leadingZero( d.getDate() ) 
+  }
+
+  function getPrevWeek(number){
+    return getPrevDate(7*undefinedNumberEqualOne(number))
+  }
+
+  function getPrevMonth(number){
+    let d = new Date().setDate( $_obj.getDate() + undefinedNumberEqualOne(number) )
+    return leadingZero( d.getMonth() )
+  }
+
+  function getPrevYear(){
+    return getPrevMonth(12*undefinedNumberEqualOne(number))
+  }
 
   function setNextDay(number){
     $_obj.setDate( $_obj.getDate() + undefinedNumberEqualOne(number) );
@@ -299,5 +345,4 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   
     return expectedData;
   }
-
 }
