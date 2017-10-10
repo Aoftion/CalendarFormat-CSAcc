@@ -145,7 +145,7 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   }
 
   function setNextWeek(number){
-    return nextDate(7*undefinedNumberEqualOne(number));
+    return setNextDate(7*undefinedNumberEqualOne(number));
   }
 
   function setNextMonth(number){
@@ -160,7 +160,7 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   }
 
   function setNextYear(number){
-    return nextMonth(12*undefinedNumberEqualOne(number));
+    return setNextMonth(12*undefinedNumberEqualOne(number));
   }
 
   function setPrevDay(number){
@@ -174,7 +174,7 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   }
 
   function setPrevWeek(number){
-    return prevDate(7*undefinedNumberEqualOne(number));
+    return setPrevDate(7*undefinedNumberEqualOne(number));
   }
 
   function setPrevMonth(number){
@@ -189,7 +189,7 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   }
 
   function setPrevYear(number){
-    return prevMonth(12*undefinedNumberEqualOne(number));
+    return setPrevMonth(12*undefinedNumberEqualOne(number));
   }
 
   function undefinedNumberEqualOne(number){
