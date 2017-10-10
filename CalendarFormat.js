@@ -37,7 +37,7 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   
   let calendarFormat = {}, $_cf = calendarFormat;
   // group's calendar 
-  $_cf.calendarObject = this.objectDateTime;
+  $_cf.calendarObject = function () { return this.objectDateTime; }
   $_cf.calendarDate = function () { return calendarDateForm(); }
   $_cf.calendarTime = function () { return calendarTimeForm(); }
   $_cf.calendarDateTime = function () { return calendarForm(); }
