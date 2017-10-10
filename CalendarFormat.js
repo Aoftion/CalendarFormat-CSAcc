@@ -50,17 +50,17 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   $_cf.getMinutes = function () { return getMinutes(); }
   $_cf.getSeconds = function () { return getSeconds(); }
   // group's next
-  $_cf.nextDay = function (number) { return nextDay(number); }
-  $_cf.nextDate = function (number) { return nextDate(number); }
-  $_cf.nextWeek = function (number) { return nextWeek(number); }
-  $_cf.nextMonth = function (number) { return nextMonth(number); }
-  $_cf.nextYear = function (number) { return nextYear(number); }
+  $_cf.setNextDay = function (number) { return setNextDay(number); }
+  $_cf.setNextDate = function (number) { return setNextDate(number); }
+  $_cf.setNextWeek = function (number) { return setNextWeek(number); }
+  $_cf.setNextMonth = function (number) { return setNextMonth(number); }
+  $_cf.setNextYear = function (number) { return setNextYear(number); }
   // group's prev
-  $_cf.prevDay = function (number) { return prevDay(number); }
-  $_cf.prevWeek = function (number) { return prevWeek(number); }
-  $_cf.prevDate = function (number) { return prevDate(number); }
-  $_cf.prevMonth = function (number) { return prevMonth(number); }
-  $_cf.prevYear = function (number) { return prevYear(number); }
+  $_cf.setPrevDay = function (number) { return setPrevDay(number); }
+  $_cf.setPrevWeek = function (number) { return setPrevWeek(number); }
+  $_cf.setPrevDate = function (number) { return setPrevDate(number); }
+  $_cf.setPrevMonth = function (number) { return setPrevMonth(number); }
+  $_cf.setPrevYear = function (number) { return setPrevYear(number); }
 
   return calendarFormat;
 
@@ -134,21 +134,21 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
       return leadingZero( $_obj.getSeconds() ).toString();
   }
 
-  function nextDay(number){
+  function setNextDay(number){
     $_obj.setDate( $_obj.getDate() + undefinedNumberEqualOne(number) );
     return dayOfWeek( $_obj.getDay() );
   }
 
-  function nextDate(number){
+  function setNextDate(number){
     $_obj.setDate( $_obj.getDate() + undefinedNumberEqualOne(number) );
     return convertDateFormat([ $_obj.getDate(), $_obj.getMonth()+1, $_obj.getFullYear() ].join(dateJoinExp));
   }
 
-  function nextWeek(number){
+  function setNextWeek(number){
     return nextDate(7*undefinedNumberEqualOne(number));
   }
 
-  function nextMonth(number){
+  function setNextMonth(number){
     if( $_obj.getDate() == lastDatOfMonth() ){
       $_obj.setDate( 1 );
       $_obj.setMonth( $_obj.getMonth() + undefinedNumberEqualOne(number) );
@@ -159,25 +159,25 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
     return convertDateFormat([ $_obj.getDate(), $_obj.getMonth()+1, $_obj.getFullYear() ].join(dateJoinExp));
   }
 
-  function nextYear(number){
+  function setNextYear(number){
     return nextMonth(12*undefinedNumberEqualOne(number));
   }
 
-  function prevDay(number){
+  function setPrevDay(number){
     $_obj.setDate( $_obj.getDate() - undefinedNumberEqualOne(number) );
     return dayOfWeek( $_obj.getDay() );
   }
 
-  function prevDate(number){
+  function setPrevDate(number){
     $_obj.setDate( $_obj.getDate() - undefinedNumberEqualOne(number) );
     return convertDateFormat([ $_obj.getDate(), $_obj.getMonth()+1, $_obj.getFullYear() ].join(dateJoinExp));
   }
 
-  function prevWeek(number){
+  function setPrevWeek(number){
     return prevDate(7*undefinedNumberEqualOne(number));
   }
 
-  function prevMonth(number){
+  function setPrevMonth(number){
     if( $_obj.getDate() == lastDatOfMonth() ){
       $_obj.setDate( 1 );
       $_obj.setMonth( $_obj.getMonth() - undefinedNumberEqualOne(number) );
@@ -188,7 +188,7 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
     return convertDateFormat([ $_obj.getDate(), $_obj.getMonth()+1, $_obj.getFullYear() ].join(dateJoinExp));
   }
 
-  function prevYear(number){
+  function setPrevYear(number){
     return prevMonth(12*undefinedNumberEqualOne(number));
   }
 
