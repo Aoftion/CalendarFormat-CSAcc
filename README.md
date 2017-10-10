@@ -12,4 +12,4 @@ using function name nextDay, nextDate, nextWeek, nextMonth, nextYear
 look at exmaple file GroupNext_Expected_Compare.js
 
 using function name prevDay, prevDate, prevWeek, prevMonth, prevYear
-look at exmaple file #GroupPrev_Expected_Compare.js
+look at exmaple file GroupPrev_Expected_Compare.js
