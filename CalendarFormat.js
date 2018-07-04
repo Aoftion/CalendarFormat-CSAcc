@@ -49,6 +49,8 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   $_cf.getHours = function () { return getHours(); }
   $_cf.getMinutes = function () { return getMinutes(); }
   $_cf.getSeconds = function () { return getSeconds(); }
+  $_cf.getFirstDateOfMonth = function () { return firstDateOfMonth(); }
+  $_cf.getLastDateOfMonth= function () { return lastDateOfMonth(); }
   //group's get Next
   $_cf.getNextDay = function (number) { return getNextDay(number); }
   $_cf.getNextDate = function (number) { return getNextDate(number); }
@@ -61,6 +63,11 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   $_cf.getPrevWeek = function (number) { return getPrevWeek(number); }
   $_cf.getPrevMonth = function (number) { return getPrevMonth(number); }
   $_cf.getPrevYear = function (number) { return getPrevYear(number); }
+  // group's set
+  $_cf.setDay = function (number) { return setDay(number); }
+  $_cf.setDate = function (number) { return setDate(number); }
+  $_cf.setMonth = function (number) { return setMonth(number); }
+  $_cf.setYear = function (number) { return setYear(number); }
   // group's next
   $_cf.setNextDay = function (number) { return setNextDay(number); }
   $_cf.setNextDate = function (number) { return setNextDate(number); }
@@ -193,6 +200,32 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
 	  let d = new Date().setFullYear( $_obj.getFullYear() - undefinedNumberEqualOne(number) );
 	    return leadingZero( new Date(d).getFullYear() );
   }
+  
+  function setDay(number){
+	  $_obj.setDate(number);
+	  return dayOfWeek( $_obj.getDay() );
+  }
+  
+  function setDate(number){
+	  $_obj.setDate(number);
+	  return convertDateFormat([ $_obj.getDate(), $_obj.getMonth()+1, $_obj.getFullYear() ].join(dateJoinExp));
+  }
+  
+  function setMonth(number){
+	  if( $_obj.getDate() == lastDateOfMonth() ){
+	    $_obj.setDate( 1 );
+	    $_obj.setMonth(number-1);
+	    $_obj.setDate( new Date( $_obj.getFullYear(), $_obj.getMonth() + 1, 0 ).getDate() );
+	  } else {
+	    $_obj.setMonth(number-1);
+	  }
+	  return convertDateFormat([ $_obj.getDate(), $_obj.getMonth()+1, $_obj.getFullYear() ].join(dateJoinExp));
+  }
+  
+  function setYear(number){
+	  $_obj.setFullYear(number);
+	  return convertDateFormat([ $_obj.getDate(), $_obj.getMonth()+1, $_obj.getFullYear() ].join(dateJoinExp));
+  }
 
   function setNextDay(number){
     $_obj.setDate( $_obj.getDate() + undefinedNumberEqualOne(number) );
@@ -209,7 +242,7 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   }
 
   function setNextMonth(number){
-    if( $_obj.getDate() == lastDatOfMonth() ){
+    if( $_obj.getDate() == lastDateOfMonth() ){
       $_obj.setDate( 1 );
       $_obj.setMonth( $_obj.getMonth() + undefinedNumberEqualOne(number) );
       $_obj.setDate( new Date( $_obj.getFullYear(), $_obj.getMonth() + 1, 0 ).getDate() );
@@ -238,7 +271,7 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
   }
 
   function setPrevMonth(number){
-    if( $_obj.getDate() == lastDatOfMonth() ){
+    if( $_obj.getDate() == lastDateOfMonth() ){
       $_obj.setDate( 1 );
       $_obj.setMonth( $_obj.getMonth() - undefinedNumberEqualOne(number) );
       $_obj.setDate( new Date( $_obj.getFullYear(), $_obj.getMonth() + 1, 0 ).getDate() );
@@ -260,8 +293,12 @@ var calendarFormat = function ( unformedDateTime, expectedDateForm, expectedTime
     return (stringSource < 10) ? '0' + stringSource : stringSource;
   }
 
-  function lastDatOfMonth(){
-    return new Date( $_obj.getFullYear(), $_obj.getMonth() + 1, 0 ).getDate();
+  function firstDateOfMonth(){
+	return leadingZero(new Date( $_obj.getFullYear(), $_obj.getMonth(), 1 ).getDate());  
+  }
+  
+  function lastDateOfMonth(){
+    return leadingZero(new Date( $_obj.getFullYear(), $_obj.getMonth() + 1, 0 ).getDate());
   }
 
   function validateUnformedDateTimeAndExpectedDataSet(){
